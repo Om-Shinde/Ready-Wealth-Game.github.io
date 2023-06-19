@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video with Question Box</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+      <div id="video-container">
+        <video id="main-video" width="1280" height="720" controls autoplay>
+          <source src="200-220_2ndchoice.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div id="question-box" class="hidden bg-white p-4 rounded-lg shadow-md">
+        <p class="text-lg font-semibold mb-2">Option for Answers:>
+        <div class="flex flex-col space-y-2 text-center">
+          <a href='deny.html'>
+          <button class="option-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded" >A) Sell profit making stock and hold loss making stock.</button></a>
+          <a href='2ndcorrect.html'>
+          <button class="option-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded" >B) Hold Profit making stock and sell loss making stock.</button></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const mainVideo = document.getElementById('main-video');
+      const questionBox = document.getElementById('question-box');
+      const optionBtns = document.querySelectorAll('.option-btn');
+      const videoContainer = document.getElementById('video-container');
+
+      mainVideo.addEventListener('ended', () => {
+        questionBox.classList.remove('hidden');
+        videoContainer.classList.add('hidden');
+      });
+
+      optionBtns.forEach(btn => {
+        btn.addEventListener('click', event => {
+          const videoSrc = event.target.dataset.videoSrc;
+          mainVideo.src = videoSrc;
+          mainVideo.play();
+          questionBox.classList.add('hidden');
+          videoContainer.classList.remove('hidden');
+        });
+      });
+    </script>
+    <style>
+      body {
+        background-image: url('space.jpg');
+        background-size: cover;
+      }
+    </style>
+  </body>
+</html>
